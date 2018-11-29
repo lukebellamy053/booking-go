@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,9 +11,13 @@ import java.util.Map;
  * Holds the response from the API
  */
 class CarOption {
+    // Holds the capacity for cars
     private static Map<String, Integer> mCarSizes;
+    // The supplier of this car
     private String mSupplier;
+    // The type of car
     private String mCarType;
+    // The price of the car
     private int mPrice;
 
 

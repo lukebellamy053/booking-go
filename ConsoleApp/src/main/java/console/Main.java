@@ -14,11 +14,15 @@ public class Main {
             final String pickup = parser.getArgument("-pickup");
             final String dropoff = parser.getArgument("-dropoff");
             final String passengers = parser.getArgument("-passengers");
+            if (passengers == null) {
+                throw new InvalidArgumentException("Passengers is missing");
+            }
             final int pass = Integer.parseInt(passengers);
+            // Start the program
             new FulfillmentEngine(pickup, dropoff, pass);
         } catch (InvalidArgumentException e) {
-            e.printStackTrace();
             System.out.println("Invalid arguments passed.");
+            System.out.println(e.getMessage());
             System.out.println("-pickup {pickup_lat,pickup_lon}");
             System.out.println("-dropoff {dropoff_lat,dropoff_lon}");
             System.out.println("-passengers {passengers}");

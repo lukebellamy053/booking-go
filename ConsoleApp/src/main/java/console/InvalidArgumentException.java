@@ -5,14 +5,12 @@ package console;
  */
 class InvalidArgumentException extends Exception {
 
-    private final ArgumentExceptions mCode;
-
-    InvalidArgumentException(String error, ArgumentExceptions code) {
+    /**
+     * Class constructor
+     *
+     * @param error The error message
+     */
+    InvalidArgumentException(String error) {
         super(error);
-        this.mCode = code;
-    }
-
-    ArgumentExceptions getCode() {
-        return this.mCode;
     }
 }

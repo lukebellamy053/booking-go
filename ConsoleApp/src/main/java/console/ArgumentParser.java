@@ -7,6 +7,10 @@ import java.util.Map;
  * Parses an array of string arguments to a map
  */
 class ArgumentParser {
+
+    /**
+     * Holds the extracted arguments
+     */
     private final Map<String, String> mArgs = new HashMap<String, String>();
 
     /**
@@ -18,10 +22,13 @@ class ArgumentParser {
     ArgumentParser(String[] args) throws InvalidArgumentException {
         String activeKey = null;
         for (final String arg : args) {
+            // Check for the indicator that it's a key
             if (arg.charAt(0) == '-') {
+                // Make sure there's something after it
                 if (arg.length() < 2) {
-                    throw new InvalidArgumentException("Argument is not valid " + arg, ArgumentExceptions.INVALID);
+                    throw new InvalidArgumentException("Argument is not valid " + arg);
                 }
+                // Set the active key
                 activeKey = arg;
                 mArgs.put(activeKey, null);
             } else if (activeKey != null && this.mArgs.get(activeKey) == null) {
@@ -29,7 +36,7 @@ class ArgumentParser {
                 this.mArgs.put(activeKey, arg);
             } else {
                 // Something isn't right
-                throw new InvalidArgumentException("Parameter usage is not correct", ArgumentExceptions.BAD);
+                throw new InvalidArgumentException("Parameter usage is not correct");
             }
         }
     }

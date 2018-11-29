@@ -1,10 +1,8 @@
 package console;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.util.*;
 
 /**
@@ -12,12 +10,18 @@ import java.util.*;
  */
 class FulfillmentEngine {
 
+    /**
+     * Holds all of the suppliers to use
+     */
     private final String[] suppliers = new String[]{
             "https://techtest.rideways.com/dave",
             "https://techtest.rideways.com/eric",
             "https://techtest.rideways.com/jeff"
     };
 
+    /**
+     * The found options
+     */
     private List<CarOption> options = new ArrayList<CarOption>();
 
     /**
@@ -27,7 +31,10 @@ class FulfillmentEngine {
      * @param dropoff    - The longitude to search for
      * @param passengers - The number of passengers to have
      */
-    FulfillmentEngine(String pickup, String dropoff, int passengers) {
+    FulfillmentEngine(String pickup, String dropoff, int passengers) throws InvalidArgumentException {
+        if (pickup == null || dropoff == null) {
+            throw new InvalidArgumentException("Parameters cannot be null");
+        }
         this.init();
         this.start(pickup, dropoff, passengers);
         this.filter();
@@ -66,10 +73,8 @@ class FulfillmentEngine {
             try {
                 response = RequestHandler.sendGet(supplier, params);
                 this.options.addAll(CarOption.getResults(response, passengers));
-            } catch (SocketTimeoutException e) {
-                System.out.println("Ignoring results from " + supplier);
             } catch (IOException e) {
-                System.out.println("An error occurred while getting results from " + supplier);
+                // Do nothing, ignore the results
             }
         }
     }
@@ -99,6 +104,9 @@ class FulfillmentEngine {
         this.options = new ArrayList<CarOption>(filteredOptions.values());
     }
 
+    /**
+     * Sort the cars into descending price order
+     */
     private void sort() {
         Collections.sort(this.options, new Comparator<CarOption>() {
             public int compare(CarOption o1, CarOption o2) {
