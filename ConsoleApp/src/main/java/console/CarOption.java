@@ -31,6 +31,15 @@ class CarOption {
     }
 
     /**
+     * Get the car sizes
+     *
+     * @return The car sizes map
+     */
+    static Map<String, Integer> getCarSizes() {
+        return CarOption.mCarSizes;
+    }
+
+    /**
      * Get a list of the results from a response
      *
      * @param response          - The JSON object from the server
@@ -49,7 +58,7 @@ class CarOption {
             option.put("supplier_id", supplier);
             result = new CarOption(option);
             size = CarOption.mCarSizes.get(result.getCarType());
-            if (size > passengers_filter) {
+            if (size != null && size > passengers_filter) {
                 results.add(result);
             }
         }

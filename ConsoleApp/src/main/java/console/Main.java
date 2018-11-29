@@ -15,11 +15,13 @@ public class Main {
             final String dropoff = parser.getArgument("-dropoff");
             final String passengers = parser.getArgument("-passengers");
             if (passengers == null) {
-                throw new InvalidArgumentException("Passengers is missing");
+                new DaveEngine(pickup, dropoff);
+            } else {
+                final int pass = Integer.parseInt(passengers);
+                // Start the program
+                new FulfillmentEngine(pickup, dropoff, pass);
             }
-            final int pass = Integer.parseInt(passengers);
-            // Start the program
-            new FulfillmentEngine(pickup, dropoff, pass);
+
         } catch (InvalidArgumentException e) {
             System.out.println("Invalid arguments passed.");
             System.out.println(e.getMessage());

@@ -13,7 +13,7 @@ class FulfillmentEngine {
     /**
      * Holds all of the suppliers to use
      */
-    private final String[] suppliers = new String[]{
+    private String[] suppliers = new String[]{
             "https://techtest.rideways.com/dave",
             "https://techtest.rideways.com/eric",
             "https://techtest.rideways.com/jeff"
@@ -22,7 +22,7 @@ class FulfillmentEngine {
     /**
      * The found options
      */
-    private List<CarOption> options = new ArrayList<CarOption>();
+    List<CarOption> options = new ArrayList<CarOption>();
 
     /**
      * Start the fulfillment engine
@@ -38,6 +38,24 @@ class FulfillmentEngine {
         this.init();
         this.start(pickup, dropoff, passengers);
         this.filter();
+        this.sort();
+        this.printResults();
+    }
+
+    /**
+     * Only use the dave supplier for part 1
+     *
+     * @param pickup  - The pickup location
+     * @param dropoff - The dropoff location
+     * @throws InvalidArgumentException If either param is null
+     */
+    FulfillmentEngine(String pickup, String dropoff) throws InvalidArgumentException {
+        if (pickup == null || dropoff == null) {
+            throw new InvalidArgumentException("Parameters cannot be null");
+        }
+        this.suppliers = new String[]{"https://techtest.rideways.com/dave"};
+        this.init();
+        this.start(pickup, dropoff, 0);
         this.sort();
         this.printResults();
     }
@@ -120,7 +138,7 @@ class FulfillmentEngine {
     /**
      * Print the results to the console
      */
-    private void printResults() {
+    protected void printResults() {
         for (CarOption option : this.options) {
             System.out.println(option.getCarType() + " - " + option.getSupplier() + " - " + option.getPrice());
         }
