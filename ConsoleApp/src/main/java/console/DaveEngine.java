@@ -18,6 +18,7 @@ public class DaveEngine extends FulfillmentEngine {
      * Print the results to the console
      */
     protected void printResults() {
+        // Print these results in a different format to the Fulfillment engine
         for (CarOption option : this.options) {
             System.out.println(option.getCarType() + " - " + option.getPrice());
         }

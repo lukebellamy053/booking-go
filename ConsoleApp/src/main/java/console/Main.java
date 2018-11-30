@@ -15,6 +15,7 @@ public class Main {
             final String dropoff = parser.getArgument("-dropoff");
             final String passengers = parser.getArgument("-passengers");
             if (passengers == null) {
+                // Start the Dave's Taxis engine
                 new DaveEngine(pickup, dropoff);
             } else {
                 final int pass = Integer.parseInt(passengers);

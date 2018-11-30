@@ -105,20 +105,24 @@ class FulfillmentEngine {
         String carType;
         CarOption compareOption;
         boolean canAdd;
+        // For all of the options, check if it can be added
         for (CarOption option : this.options) {
             canAdd = true;
             carType = option.getCarType();
+            // Check if the car has been added already
             if (filteredOptions.containsKey(carType)) {
                 compareOption = filteredOptions.get(carType);
                 if (compareOption != null) {
+                    // Check to see which is cheaper
                     canAdd = option.getPrice() < compareOption.getPrice();
                 }
             }
-
+            // Check if we can set this option as the new value
             if (canAdd) {
                 filteredOptions.put(carType, option);
             }
         }
+        // Set the new filtered options
         this.options = new ArrayList<CarOption>(filteredOptions.values());
     }
 
@@ -126,6 +130,7 @@ class FulfillmentEngine {
      * Sort the cars into descending price order
      */
     private void sort() {
+        // Sort the options into descending order
         Collections.sort(this.options, new Comparator<CarOption>() {
             public int compare(CarOption o1, CarOption o2) {
                 if (o1.getPrice() > o2.getPrice()) return -1;

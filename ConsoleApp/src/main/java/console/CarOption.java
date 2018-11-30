@@ -53,10 +53,13 @@ class CarOption {
         CarOption result;
         List<CarOption> results = new ArrayList<CarOption>();
         Integer size;
+        // For all of the options, add the supplier ID to the object
         for (int i = 0; i < options.length(); i++) {
             option = options.getJSONObject(i);
             option.put("supplier_id", supplier);
+            // Create a new option from the JSON
             result = new CarOption(option);
+            // Get the size of the car
             size = CarOption.mCarSizes.get(result.getCarType());
             if (size != null && size > passengers_filter) {
                 results.add(result);
