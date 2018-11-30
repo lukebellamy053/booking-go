@@ -34,7 +34,7 @@ Otherwise the results will be listed in rows using the following format:
 
 {car type} - {price}
 
-This code was written using the Intellij IDEA Ultimate Edition 2018.2.5 IDE 
+
 
 ### Passengers
 
@@ -43,7 +43,7 @@ The second part of task 1 can be triggered by adding the passengers parameter to
 java -jar app-1-jar-with-dependencies.jar -pickup 3.410632,-2.157533 -dropoff 3.410632,-2.157533 -passengers 4
  ```
 
-
+This code was written using the Intellij IDEA Ultimate Edition 2018.2.5 IDE 
  ## Part 2 (API)
  
  The API for this task was written in NodeJS due to the simplicity of it. To start the server, please follow the following steps:
@@ -66,6 +66,10 @@ java -jar app-1-jar-with-dependencies.jar -pickup 3.410632,-2.157533 -dropoff 3.
   
 ```sh
 http://localhost:8080/pickup/{pickup}/dropoff/{dropoff}/passengers/{passengers}
+```
+Example
+```sh
+http://localhost:8080/pickup/3.410632,-2.157533/dropoff/3.410632,-2.157533/passengers/3
 ```
   
   Replace the {pickup}, {dropoff} and {passengers} tags with your values to see the API response
